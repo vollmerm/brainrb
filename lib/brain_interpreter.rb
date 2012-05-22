@@ -1,17 +1,39 @@
-class BrainInterpreter
+#######################################################################################
+#
+# BrainInterpreter class
+#
+# The interpreter has an instruction list and an instruction pointer. It executes
+# the code by looking at one instruction at a time and moving the pointer.
+# Because brainfuck is such a simple language, a complicated parser (or any parser)
+# is not necessary. add_instruction discards comments and adds valid instructions
+# to the instruction list.
+#
+# Mike Vollmer, 2012
+# Code is GPL; See included LICENSE
+#
+#######################################################################################
 
+class BrainInterpreter
+  
+  # instance variables:
+  #    @mem      ->  the memory object
+  #    @ins      ->  the instructions list
+  #    @ins_ptr  ->  the instruction pointer
+  
   def initialize(size)
     @mem = BrainMemory.new(size)
     @ins = []
     @ins_ptr = 0
   end
 
+  # execute reads one instruction at a time until it reaches the end
   def execute
     while not end_of_instruction?
       read_instruction
     end
   end
 
+  # add instruction adds instructions, discarding invalid characters (comments)
   def add_instruction(chr)
     @ins.push chr if ['>','<','+','-','.',',','[',']'].include? chr
   end
@@ -21,7 +43,7 @@ class BrainInterpreter
   end
 
   def read_instruction
-    #puts "Executing instruction #{@ins_ptr}"
+    # decide what to do for the current instruction
     case @ins[@ins_ptr]
     when '>'
       @mem.increment_ptr
@@ -36,21 +58,24 @@ class BrainInterpreter
       @mem.decrement_at_ptr
       @ins_ptr += 1
     when '.'
+      # .chr converts the number to a character
       print @mem.at_ptr.chr
       @ins_ptr += 1
     when ','
+      # get_character returns a number
       @mem.store_at_ptr get_character
       @ins_ptr += 1
     when '['
       # loop start
       if @mem.at_ptr == 0
-        match_end
+        match_end # jump to matching ]
       else
         @ins_ptr += 1
       end
     when ']'
+      # loop end
       if @mem.at_ptr != 0
-        match_begin
+        match_begin # jump to matching [
       else
         @ins_ptr += 1
       end
