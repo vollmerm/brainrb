@@ -13,6 +13,11 @@
 
 class BrainMemory
 
+  # instance variables:
+  #    @size  ->  size of the memory array
+  #    @mem   ->  memory array     
+  #    @ptr   ->  memory pointer
+
   # create an array of specified size
   def initialize(size)
     @size = size
