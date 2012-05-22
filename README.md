@@ -16,6 +16,17 @@ I had two goals when building brainrb:
  
 The code should be straightforward to read and understand, even for Ruby beginners.
 
+Requirements
+------------
+
+brainrb depends on the gems Trollop and HighLine. Both can be installed with rubygems:
+
+```
+gem install trollop highline
+```
+
+Trollop is used to parsing command line options, and HighLine is used for reading individual characters without waiting for a line break.
+
 What is brainfuck?
 ------------------
 
