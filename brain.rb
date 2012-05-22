@@ -25,8 +25,8 @@ require 'brain_interpreter.rb'
 
 # set up the command line option parsing
 opts = Trollop::options do
-	version "brainrb 0.1a"
-	banner <<-EOS
+  version "brainrb 0.1a"
+  banner <<-EOS
 brainrb: a simple brainfuck interpreter created by Mike Vollmer and implemented in Ruby.
 
 Usage:
@@ -34,24 +34,24 @@ brain.rb [options] <filename>
 
 Available options:
 EOS
-	
-	opt :mem, "Size of allocated memory in bytes", 
-		{ :type => Integer, :default => 30000 }
+  
+  opt :mem, "Size of allocated memory in bytes", 
+    { :type => Integer, :default => 30000 }
 end
 
 # file must exist
 Trollop::die :file, "must exist" unless File.exist?(opts[:file]) if opts[:file]
 
 if not ARGV[0] 
-	puts "Nothing to do. Try brainrb -h for more information"
+  puts "Nothing to do. Try brainrb -h for more information"
 else
   # open the file for reading
-	file = File.new(ARGV[0],"r")
-	# create the interpreter object
-	interpreter = BrainInterpreter.new(opts[:mem])
-	# read in the instructions
-	while char = file.getc
-		interpreter.add_instruction(char)
-	end
-	interpreter.execute # run the program
+  file = File.new(ARGV[0],"r")
+  # create the interpreter object
+  interpreter = BrainInterpreter.new(opts[:mem])
+  # read in the instructions
+  while char = file.getc
+    interpreter.add_instruction(char)
+  end
+  interpreter.execute # run the program
 end
