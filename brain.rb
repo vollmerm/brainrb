@@ -34,13 +34,9 @@ brain.rb [options] <filename>
 
 Available options:
 EOS
-  
   opt :mem, "Size of allocated memory in bytes", 
     { :type => Integer, :default => 30000 }
 end
-
-# file must exist
-Trollop::die :file, "must exist" unless File.exist?(opts[:file]) if opts[:file]
 
 if not ARGV[0] 
   puts "Nothing to do. Try brainrb -h for more information"
