@@ -33,7 +33,7 @@ What is brainfuck?
 brainfuck is a minimal programming language and turing tarpit designed primarily
 to amuse programmers. It is technically capable but of little practical use.
 
-Definition of "turing tarpit" from Epigrams on Programming by Alan Perlis:
+Definition of "turing tarpit" from *Epigrams on Programming* by Alan Perlis:
 
 > Beware of the Turing tar-pit in which everything is possible but nothing of interest is easy.
 
